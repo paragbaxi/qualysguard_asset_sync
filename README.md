@@ -37,53 +37,29 @@ Usage
     optional arguments:
     
       -h, --help            show this help message and exit
-    
       -a ASSET_GROUP, --asset_group ASSET_GROUP
-    
                             Asset group(s) -- office -- to sync. If not specified,
-    
                             sync all offices.
-    
       -b, --debug           Outputs additional information to log.
-    
       -c, --static_ip       Calculates and syncs only static IP range.
-    
       -d, --dhcp_ip         Syncs DHCP range.
-    
       --check_cmdb          Check CMDB's office listings against Google Doc's
-    
                             offices.
-    
       -f, --print_offices   Print all offices.
-    
       -g, --glob            Convert IP ranges in Google Docs to glob format
-    
                             ('10.0.0.0, 10.0.0.1, 10.0.0.2' -->
-    
                             '10.0.0.0-10.0.0.2').
-    
       -i INI, --ini INI     Configuration file for login (default =
-    
                             config.ini).
-    
       -k KEY, --key KEY     Google spreadsheet to access.
-    
       -o, --office_ip       Syncs office IP range.
-    
       -p, --print_asset_groups
-    
                             Print all QualysGuard asset groups.
-    
       -r, --qradar          Sync QRadar buckets, create tab-delimited CSV file
-    
                             from Google Spreadsheet.
-    
       -s, --sync            Sync all IP ranges (office, DHCP, and static).
-    
       --skip_calc_static    Skip calculating static range.
-    
       --skip_qg_update      Skip updating QualysGuard asset groups.
-    
       --test                Test.
 
 Requirements
