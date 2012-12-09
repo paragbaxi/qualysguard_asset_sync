@@ -66,7 +66,7 @@ def gdocs_print_offices(feed):
 def check_cmdb(feed):
     """Check what offices in CMDB are not in QualysGuard."""
     # Pull from CMDB here.
-    cmdb_list = ['Site1', 'Site2'']
+    cmdb_list = ['Site1', 'Site2']
     city_list = []
     not_found_list = []
     # Go row by row of Google spreadsheet.
@@ -506,7 +506,7 @@ def qg_update_ag(qg_asset_groups, this_asset_group, ag_ip_range, scanners, scann
         failed['reason'] = str(tree.RETURN).strip()
         return failed
         #  TODO:  Add hosts
-        # <RETURN status="FAILED" number="5101">Invalid value for 'host_ips' : 10.182.7.0,10.182.7.10,10.182.7.241-10.182.7.255,10.182.71.0-10.182.72.59,10.182.72.240-10.182.73.99,10.182.73.255-10.182.74.30,10.182.74.128-10.182.74.135,10.182.74.240-10.182.75.0,10.182.75.255,10.182.83.0-10.182.83.64,10.182.83.127-10.182.83.255,10.182.205.0-10.182.205.50,10.182.205.240-10.182.205.255 (not assigned to AG owner). IPs do not exist in the user account.</RETURN>
+        # <RETURN status="FAILED" number="5101">Invalid value for 'host_ips' : 10.182.7.0 (not assigned to AG owner). IPs do not exist in the user account.</RETURN>
     return None
 
 def CellsUpdateAction(gd_client, key, wksht_id, row, col, inputValue):
