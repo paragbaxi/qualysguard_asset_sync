@@ -1,8 +1,3 @@
-qg_asset_sync
-=============
-
-QualysGuard Asset Sync
-
 Note: This is not supported by Qualys, it is community built. Thanks to Qnimbus for the solution below.
 Download
 
@@ -12,14 +7,20 @@ Description
 The Python 2.7 call syncs QualysGuard's asset groups with a CMDB sourced from a Google Spreadsheet.
 
     Intelligently creates or updates asset groups with IPs. Also assigns default scanner and assigned scanners based on configurable criteria.
-    Consumes almost any kind of IP address groupingand converts to range IP address grouping in CMDB for easy human reading. Only nmap style is not supported (10.0.0-255.0-255).
+    Creates up to three asset groups per row/site. Use case: asset group to schedule scans during work hours for DHCP, typically workstations.
+        Complete site range = "Region - Site"
+        Site's specified DHCP column = "Region - Site DHCP"
+        Site's specified static column = "Region - Site static"
+    Consumes almost any kind of IP address groupingand converts to range IP address grouping in CMDB for easy human reading. Only nmap style is not supported (10.0.0-255.0-255). Example of what is supported:
+        Original: "192.168.0.1, 192.168.0.2, 192.168.0.3, 192.168.2.0/24, 192.16.3.0-192.168.3.255"
+        Converts to: "192.168.0.1-192.168.0.3, 192.168.2.0/23"
     Intelligently deletes asset groups that no longer exist in CMDB.
     Also creates a buckets.csv file to sync CMDB to sync to IBM QRadar's "buckets".
 
 Note: This can easily be modified to support CSV files.
 
 Usage
-    
+
     $ python sync_qg_asset_groups.py -h
     Logged into Google Docs...
     
@@ -61,13 +62,11 @@ Usage
     
                             '10.0.0.0-10.0.0.2').
     
-      -i INI, --ini INI     Configuration file for login & JIRA issues (default =
+      -i INI, --ini INI     Configuration file for login (default =
     
                             config.ini).
     
-      -k KEY, --key KEY     Google spreadsheet to access. If not specified, access
-    
-                            rm2 office tracker.
+      -k KEY, --key KEY     Google spreadsheet to access.
     
       -o, --office_ip       Syncs office IP range.
     
@@ -88,6 +87,38 @@ Usage
       --test                Test.
 
 Requirements
+CMDB Google Spreadsheet
+
+Each row is its own site/office. For example, the North American, New York site ("NA - New York" asset group) is on its own row.
+
+Columns (in any order)
+
+    "Region": Region of site. Example: "NA".
+    "Office": Office name. Example: "New York".
+    "IP Address Assignment": Complete IP range. Example: "10.1.0.0/16"
+    "IP Address DHCP": DHCP range of office. Example: "10.1.128.0/17"
+    "IP Address static": Optional, static range of office. This is calculated from complete range minus DHCP range. Example: "", or "10.1.0.0-10.1.255.255"
+
+Configuration
+
+config.ini:
+
+; Semicolon (;) disables command.
+
+;
+
+[QualysGuard]
+
+username = QualysGuard API username
+
+password = QualysGuard API password
+
+[Google]
+
+username = cmdb@domain_name.com
+
+password = CMDB Google password
+
 Source
 
     Python 2.7
