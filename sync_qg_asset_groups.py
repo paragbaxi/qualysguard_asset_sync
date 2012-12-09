@@ -762,9 +762,9 @@ parser.add_argument('-f', '--print_offices', action = 'store_true', default = Fa
 parser.add_argument('-g', '--glob', action = 'store_true',
                     help = 'Convert IP ranges in Google Docs to glob format (\'10.0.0.0, 10.0.0.1, 10.0.0.2\' --> \'10.0.0.0-10.0.0.2\').')
 parser.add_argument('-i', '--ini', default = 'config.ini',
-                    help = 'Configuration file for login & JIRA issues (default = config.ini).')
+                    help = 'Configuration file for login.')
 parser.add_argument('-k', '--key', default = 'default_google_spreadsheet_here',
-                    help = 'Google spreadsheet to access.  If not specified, access rm2 office tracker.')
+                    help = 'Google spreadsheet to access.')
 parser.add_argument('-o', '--office_ip', action = 'store_true',
                     help = 'Syncs office IP range.')
 parser.add_argument('-p', '--print_asset_groups', action = 'store_true',
